@@ -1,7 +1,7 @@
 <template>
-  <div class="home-icon">
+  <router-link to="/" class="home-icon">
     <img src="../../assets/img/shelfpage.png" />
-  </div>
+  </router-link>
 </template>
 <script>
 export default {

@@ -1,6 +1,6 @@
 <template>
   <div class="containe">
-    <CoverDetail v-bind:cover="bookDetail.result[0].image" />
+    <CoverDetail v-bind:cover="bookDetail.result[0]" />
     <div class="isi">
       <SideLeft v-bind:BookDetail="bookDetail.result[0]" />
       <SideRight v-bind:BookDetail="bookDetail.result[0]" />
@@ -83,31 +83,7 @@ export default {
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
 }
-#container-del {
-  display: none;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  z-index: 4;
-  padding-top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 900px;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-.add-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fefefe;
-  padding: 20px;
-  border: 1px solid #888888;
-  width: 630px;
-  height: 500px;
-  border-radius: 5px;
-}
+
 /* --------------------- css modal --------------------- */
 .parent {
   display: flex;
@@ -237,64 +213,7 @@ export default {
   font-size: 17px;
   text-decoration: none;
 }
-input[type="text"],
-textarea {
-  width: 400px;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-.ibu {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 350px;
-  width: 500px;
-  background: #ffffff;
-  border-radius: 8px;
-  border: 1px solid #888888;
-}
-.anak1 {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 50px;
-  width: 470px;
-  margin-top: 10px;
-  margin-bottom: 50px;
-  color: red;
-  font-size: 50px;
-}
-.anak1:hover,
-.anak1:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-.anak2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  width: 400px;
-  margin-bottom: 5px;
-}
-.anak2 img {
-  height: 100px;
-  width: 100px;
-}
-.anak3 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-  width: 400px;
-}
-.anak3 p {
-  font-family: "Airbnb Cereal App Bold";
-  font-size: 20px;
-}
+
 /* -------------css modal end --------------- */
 @media (max-width: 768px) {
   .kiri {

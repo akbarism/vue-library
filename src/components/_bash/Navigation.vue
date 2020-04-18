@@ -1,49 +1,85 @@
 <template>
-  <div class="navigasi">
-    <div class="kategori" v-bind:value="message">
-      <a @click="down">
-        {{message}}
-        <i class="fas fa-caret-down"></i>
-      </a>
-      <ul class="dropdown-categories up">
-        <li @click="down">
-         <router-link to="AllCategories"> Novel</router-link>
-          </li>
-        <li @click="down">Komik</li>
-        <li @click="down">Sejarah</li>
-        <li @click="down">other/li>
-        <li @click="down">other</li>
-        <li @click="down">other</li>
-      </ul>
-      <a @click="downy">
-        All times
-        <i class="fas fa-caret-down"></i>
-      </a>
-      <ul class="dropdown-alltime up">
-        <li>All Categories</li>
-        <li>All Categories</li>
-        <li>All Categories</li>
-      </ul>
-    </div>
-    <div class="serah">
-      <input type="text" id="cari" name="search" placeholder="search book" />
-      <a href="#">
+  <div>
+    <div v-if="local.result[0]">
+      <div class="navigasi">
+        <div></div>
+        <div class="kategori" v-bind:value="message">
+          <a @click="down">
+            {{message}}
+            <i @click="search" class="fas fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-categories up">
+            <li @click="$emit(author)">Author</li>
+            <li @click="catwgoryMystery">Titleh</li>
+          </ul>
+          <a @click="downy">
+            All times
+            <i class="fas fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-alltime up">
+            <li>All Categories</li>
+            <li>All Categories</li>
+            <li>All Categories</li>
+          </ul>
+        </div>
+
         <i class="fas fa-search"></i>
-      </a>
+        <input type="text" class="cari" name="search" placeholder="search book" />
+
+        <router-link to="Dashboard" class="logo">
+          <img src="../../assets/img/shelfpage.png" alt="logo" />
+          <h1>Library</h1>
+        </router-link>
+      </div>
     </div>
-    <router-link to="Dashboard" class="logo">
-      <img src="../../assets/img/shelfpage.png" alt="logo" />
-      <h1>Library</h1>
-    </router-link>
+    <!-- teeeeeeeeeeeeeeetetetetettttttttttttteteteteeeeeeeeeeeeeeet -->
+    <div v-else>
+      <div class="navigasi">
+        <div>
+          <router-link to="Dashboard" class="logo-if">
+            <img src="../../assets/img/shelfpage.png" alt="logo" />
+            <h1>Library</h1>
+          </router-link>
+        </div>
+        <div class="if-kategori" v-bind:value="message">
+          <a @click="down">
+            {{message}}
+            <i @click="search" class="fas fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-categories up">
+            <li @click="$emit(author)">Author</li>
+            <li @click="catwgoryMystery">Title</li>
+          </ul>
+          <a @click="downy">
+            All times
+            <i class="fas fa-caret-down"></i>
+          </a>
+          <ul class="dropdown-alltime up">
+            <li>All Categories</li>
+            <li>All Categories</li>
+            <li>All Categories</li>
+          </ul>
+        </div>
+        <i class="fas fa-search"></i>
+        <input type="name" class="if-cari" placeholder="search book" />
+        <contoh />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import Axios from "axios";
+import contoh from "../../components/_bash/contoh";
 export default {
+  components: {
+    contoh
+  },
   name: "Navigation",
   data() {
     return {
-      message: "All Categories"
+      message: "Sort by :",
+      local: []
     };
   },
   methods: {
@@ -53,6 +89,15 @@ export default {
     downy() {
       document.querySelector(".dropdown-alltime").classList.toggle("up");
     }
+  },
+  created() {
+    Axios.get(`http://localhost:8000/user/${localStorage.idUser}`)
+      .then(res => {
+        this.local = res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
 </script>
@@ -61,50 +106,97 @@ export default {
 .navigasi {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 60px;
   box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.2);
   background-color: white;
+  font-family: "Airbnb Cereal App Bold";
   z-index: 3;
 }
+.none {
+  display: none;
+}
+.if-kategori {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+  height: 70px;
+}
+.if-kategori a {
+  font-family: "Airbnb Cereal App Bold";
+  font-size: 17px;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.if-cari {
+  position: relative;
+  width: 320px;
+  height: 50px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  padding-left: 40px;
+  margin-left: -100px;
+}
+.logo-if {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  height: 70px;
+  font-family: "Airbnb Cereal App Bold";
+  color: black;
+  text-decoration: none;
+}
+.logo-if img {
+  width: 50px;
+  height: 50px;
+}
+/* -----------------ELSA------------ */
 .kategori {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  width: 400px;
+  width: 200px;
   height: 70px;
-  margin-left: 280px;
+  margin-right: -200px;
 }
 .kategori a {
   font-family: "Airbnb Cereal App Bold";
   font-size: 17px;
   color: black;
   text-decoration: none;
+  cursor: pointer;
 }
-#cari {
+.cari {
+  position: relative;
   width: 320px;
   height: 50px;
-  padding: 12px;
+  padding: 5px;
   border: 1px solid #ccc;
   border-radius: 30px;
   padding-left: 40px;
-  margin-top: 5px;
+  margin-left: -300px;
 }
-#cari + a {
+.fas {
   position: relative;
-  left: -305px;
   color: #777;
+  cursor: pointer;
+  z-index: 2;
 }
-#cari + a:focus {
+.fas:hover {
   color: #0099ff;
 }
 .logo {
   display: flex;
+  align-items: center;
   width: 230px;
   height: 70px;
   font-family: "Airbnb Cereal App Bold";
   color: black;
-text-decoration: none;
+  text-decoration: none;
 }
 .logo img {
   width: 50px;
@@ -152,5 +244,16 @@ text-decoration: none;
 }
 .dropdown-alltime li:hover {
   background: #d0cccc;
+}
+@media (max-width: 414px) {
+.if-kategori{
+  display: none;
+}
+.if-cari{
+  display: none;
+}
+.logo-if{
+  display: none;
+}
 }
 </style>

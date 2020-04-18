@@ -3,8 +3,10 @@
     <div class="thumbnail">
       <img :src="BookDetail.image" alt />
     </div>
+    <div class="t">Add To Cart</div>
     <div class="borrow-button" v-if="BookDetail.status === 1">Borrow</div>
     <div class="cant-button" v-else>Borrow</div>
+    
   </div>
 </template>
 <script>

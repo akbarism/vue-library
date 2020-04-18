@@ -3,19 +3,13 @@
     <div class="add-content">
       <div class="parent">
         <div class="detail">
-          <div class="ed">Add Data</div>
+          <div class="ed">Edit Data</div>
           <p @click="close" class="fck">&times;</p>
         </div>
-        <form >
+        <form>
           <div class="form-group">
             <label class="label-title" for="exampleFormControlInput1">Title</label>
-            <input
-              v-model="dataUser.tittle"
-              type="text"
-              class="form-control"
-              id="exampleFormControlInput1"
-              placeholder="title.."
-            />
+            <input class="form-control" id="exampleFormControlInput1" :value="dataUser.tittle" />
           </div>
           <div class="form-group">
             <label class="label-title" for="exampleFormControlInput1">Author</label>
@@ -29,32 +23,29 @@
           </div>
           <div class="form-group">
             <label class="label-title" for="exampleFormControlInput1">Status</label>
-            <select v-model="dataUser.status" class="form-control" id="exampleFormControlInput1">
-              <option value="1">Available</option>
-              <option value="0">Unavailable</option>
-            </select>
+            <input
+              v-model="dataUser.status"
+              type="text"
+              class="form-control"
+              id="exampleFormControlInput1"
+              placeholder="Status.."
+            />
           </div>
           <div class="form-group">
             <label class="label-title" for="exampleFormControlInput1">Id Category</label>
-            <select
+            <input
               v-model="dataUser.id_category"
               type="text"
               class="form-control"
               id="exampleFormControlInput1"
               placeholder="Id Category.."
-            >
-              <option value="1">Life</option>
-              <option value="2">Mistery</option>
-              <option value="3">Comic</option>
-              <option value="4">Eductaion</option>
-            </select>
+            />
           </div>
           <div class="form-group">
             <label class="label-title" for="exampleFormControlInput1">Image Url</label>
             <input
-              
-              type="file"
-              ref="file"
+              v-model="dataUser.image"
+              type="text"
               class="form-control"
               id="exampleFormControlInput1"
               placeholder="Url Image.."
@@ -69,7 +60,7 @@
               rows="3"
             ></textarea>
           </div>
-          <button class="buttonAdd" @click="submit">Save</button>
+          <a href="#" class="buttonEdit" @click="submit">Edit</a>
         </form>
       </div>
     </div>
@@ -78,7 +69,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "ModalAdd",
+  name: "ModalEdit",
   data() {
     return {
       dataUser: {
@@ -91,25 +82,21 @@ export default {
       }
     };
   },
+  props: ["IdBook"],
   mounted() {},
   methods: {
     close() {
       document.querySelector(".modal-add").classList.toggle("modal-on");
     },
-    submit(e) {
-      e.preventDefault();
-      const fd = new FormData();
-      fd.append("tittle", this.dataUser.tittle);
-      fd.append("author", this.dataUser.author);
-      fd.append("image", this.$refs.file.files[0]);
-      fd.append("status", this.dataUser.status);
-      fd.append("id_category", this.dataUser.id_category);
-      fd.append("description", this.dataUser.description);
-      axios.post(`http://localhost:8000/book/`, fd)
-      .then(res => {
-        res.data;
-        this.$router.replace(`Book/${res.data.result.insertId}`);
-      });
+    submit() {
+      axios
+        .patch(`http://localhost:8000/book/`, this.$route.params.IdBook)
+        .then(res => {
+          res.data;
+          this.$router.replace(
+            `"http://localhost:8000/book/"${this.$route.params.IdBook}`
+          );
+        });
     }
   }
 };
@@ -126,7 +113,7 @@ export default {
   left: 0;
   right: 0;
   width: 100%;
-  height: 100vh;
+  height: 800px;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -141,13 +128,13 @@ export default {
   padding: 20px;
   border: 1px solid #888888;
   width: 700px;
-  height: 650px;
+  height: 700px;
   border-radius: 5px;
 }
 .parent {
   display: flex;
   flex-direction: column;
-  height: 550px;
+  height: 650px;
   width: 600px;
   /* background: #fbcc38; */
 }
@@ -193,7 +180,7 @@ p.fck:focus {
   font-family: "Airbnb Cereal App Bold";
   font-size: 20px;
 }
-.buttonAdd {
+.buttonEdit {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,34 +1,27 @@
 <template>
-  <div class="carder">
-    <router-link :to="'Book/'+book.id_book" class="card1" v-for="book in books" :key="book.id_book">
-      <img :src="book.image" />
-      <div class="sinopsis">
-        <h1>{{book.tittle}}</h1>
-        <p>{{book.description}}</p>
-      </div>
-    </router-link>
-    <nav aria-label="...">
-      <ul class="pagination">
-        <li class="page-item">
-          <a class="page-link" @click="prevPages">Previous</a>
-        </li>
-
-        <li class="page-item" v-for="page in totalPages" :key="page">
-          <a class="page-link" @click="pages(page)">{{page}} <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="page-item next">
-          <a class="page-link" @click="nextPages">Next</a>
-        </li>
-      </ul>
-    </nav>
-  </div>
+  <div class="parent">
+        <h1>Cart</h1>
+        <div class="list">
+            <div class="thumb"><img src="" alt=""></div>
+            <div class="detil">
+                <div class="judul">
+                    <p>KALA</p>
+                </div>
+                <div class="penulis">
+                    <p>STEFANI BELLA</p>
+                </div>
+                <div class="deskripsi">
+                    <p>KKKKKKKKKKK </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
 import axios from "axios";
 export default {
-  name: "CardOfBook",
+  name: "Cart",
   methods: {
     pages(id) {
       this.currentPage = 0 + id;

@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="tahun">
-      <p>{{BookDetail.created_at}}</p>
+      <p>Author : {{BookDetail.author}}</p>
     </div>
     <div id="paragraf">
       <p>{{BookDetail.description}}</p>
@@ -42,6 +42,7 @@ export default {
   width: 90%;
   height: 50px;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 .novel p {
   display: flex;
@@ -56,12 +57,13 @@ export default {
 .judul {
   display: flex;
   justify-content: space-between;
-  text-align: center;
+  /* text-align: center; */
   width: 90%;
-  height: 90px;
+  height: 100px;
+  margin-bottom: 20px;
 }
 .judul h1 {
-  font-size: 50px;
+  font-size: 40px;
 }
 .judul p {
   color: #99d815;
@@ -72,6 +74,7 @@ export default {
   display: flex;
   width: 90%;
   height: 40px;
+  font-size: 20px;
 }
 #paragraf {
   height: 255px;

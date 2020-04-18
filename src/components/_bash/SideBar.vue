@@ -1,31 +1,74 @@
 <template>
-  <div class="sider kntl">
+  <div class="sider kental">
     <div @click="klik" class="iconic move">
       <img src="../../assets/img/ikon.png" alt="ikon" />
     </div>
     <div class="profil">
-      <img src="../../assets/img/niki-zefanya.jpg" alt />
-      <p>Niki Zefanya</p>
+      <img :src="tes.result[0].photo" alt />
+      <input type="file" @change="onFileSelected" />
+      <button @change="onupload">Upload</button>
+      <p>{{tes.result[0].fullname}}</p>
     </div>
     <div class="side-menu">
-      <section>Explore</section>
-      <section>History</section>
-      <section>Add Book*</section>
-      <router-link to="Login">Log Out</router-link>
+      <section @click="$emit('swipup')">Explore</section>
+      <section>
+        <router-link to="History">History</router-link>
+      </section>
+      <section>Cart</section>
+      <div v-if="tes.result[0].role == 'admin'">
+        <section @click="kliks">Add Book</section>
+      </div>
+      <section @click="logout">Log Out</section>
     </div>
   </div>
 </template>
 <script>
+import Axios from "axios";
 export default {
   name: "SideBar",
   props: ["classes"],
   data() {
-    return {};
+    return {
+      tes: {},
+      photo: null
+    };
   },
   methods: {
     klik() {
-      document.querySelector(".sider").classList.toggle("kntl");
+      document.querySelector(".sider").classList.toggle("kental");
       document.querySelector(".iconic").classList.toggle("move");
+    },
+    kliks() {
+      document.querySelector(".modal-add").classList.toggle("modal-on");
+    },
+    logout() {
+      delete localStorage.password;
+      delete localStorage.idUser;
+      this.$router.go("/");
+    },
+    onFileSelected(event) {
+      this.photo = event.target.files[0];
+    },
+    onupload() {
+      const fd = new FormData();
+      fd.append("photo", this.photo, this.photo);
+      Axios.post(`http://localhost:8000/user/`, fd).then(res => {
+        console.log(res);
+      });
+    }
+  },
+  created() {
+    Axios.get(`http://localhost:8000/user/${localStorage.idUser}`)
+      .then(res => {
+        this.tes = res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    const tag = document.querySelector(".signin");
+    const tes = tes.result[0].fullname;
+    if (tes == true) {
+      tag.style.display = "block";
     }
   }
 };
@@ -36,7 +79,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  position: absolute;
+  position: fixed;
   width: 280px;
   height: 100vh;
   z-index: 4;
@@ -45,7 +88,7 @@ export default {
   left: 0;
   transition: 0.5s all;
 }
-.kntl {
+.kental {
   left: -280px;
 }
 .iconic {
@@ -96,24 +139,16 @@ export default {
   display: flex;
   flex-direction: column;
   width: 150px;
-  height: 250px;
-  margin-top: 30px;
+  height: 150px;
+  /* margin-top: 10px; */
   z-index: 5;
-}
-.side-menu a {
-  cursor: pointer;
-  font-family: "Airbnb Cereal App Bold";
-  font-size: 25px;
-  padding: 17px 10px;
-  color: black;
-  text-decoration: none;
 }
 .side-menu section {
   cursor: pointer;
   cursor: pointer;
   font-family: "Airbnb Cereal App Bold";
   font-size: 25px;
-  padding: 17px 10px;
+  padding: 10px 10px;
   color: black;
 }
 </style>

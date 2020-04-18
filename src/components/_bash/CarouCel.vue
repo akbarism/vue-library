@@ -1,64 +1,131 @@
 <template>
-  <div class="caroucel" :class="beHiden">
-    <div class="slide-a">
-      <div class="opaciti">
-        <h1>Dilan 1990</h1>
-        <p>Pidi Baiq</p>
+  <div>
+    <div v-if="local.result[0]">
+      <div class="caroucel hiden">
+        <div class="slide-a">
+          <div class="opaciti">
+            <h1>Dilan 1990</h1>
+            <p>Pidi Baiq</p>
+          </div>
+        </div>
+        <div class="slide-b">
+          <div class="opacity">
+            <h1>Ubur-ubur Lembur</h1>
+            <p>Raditya Dika</p>
+          </div>
+        </div>
+        <div class="slide-c">
+          <div class="opaciti">
+            <h1>Laskar Pelangi</h1>
+            <p>Andrea hirata</p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="slide-b">
-      <div class="opacity">
-        <h1>Ubur-ubur Lembur</h1>
-        <p>Raditya Dika</p>
-      </div>
-    </div>
-    <div class="slide-c">
-      <div class="opaciti">
-        <h1>Laskar Pelangi</h1>
-        <p>Andrea hirata</p>
-      </div>
-    </div>
-    <div class="slide-btn">
-      <div class="lbtn">
-        <a href="#">
-          <i class="fas fa-angle-left"></i>
-        </a>
-      </div>
-      <div class="rbtn">
-        <a href="#">
-          <i class="fas fa-angle-right"></i>
-        </a>
+    <!-- teeeeeeeeeretrterterterteteeeeeeeeeeeeeeeeetretretretretetteee -->
+    <div v-else>
+      <div class="regis">
+        <div class="tagline">
+          <h1>
+            book is a window
+            <br />to the world
+          </h1>
+        </div>
+        <div class="form-regis">
+          <p>New Here? Create a free account !!</p>
+
+          <div class="footer">
+            <button @click="sign" type="submit" class="btnreg">Sign Up</button>
+            <h5>
+              By signing up, you agree to Book’s Terms and
+              <br />Conditions and Privacy Policy
+            </h5>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { required, email, minLength} from "vuelidate/lib/validators";
+import Axios from "axios";
 export default {
   name: "CarouCel",
-  props: ["beHiden"]
+  props: ["beHiden"],
+  data() {
+    return {
+      local: [],
+      fullname: null,
+      email: null,
+      password: null
+    };
+  },
+     validations: {
+    email: { required, email },
+    fullname: { required },
+    password: { required, minLength: minLength(6) }
+  },
+  methods: {
+    sign(e) {
+      e.preventDefault()
+      this.submitted = true;
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return;
+      }else{
+      Axios.post(`http://localhost:8000/user/register`, {
+        fullname: this.fullname,
+        email: this.email,
+        password: this.password
+      }).then(res => {
+        res.data;
+        alert('check ur email')
+        this.$router.go("/");
+      });
+    }
+  }
+  },
+  updated() {
+    if (this.email === "0") {
+      this.email = null;
+    }
+  },
+  created() {
+    Axios.get(`http://localhost:8000/user/${localStorage.idUser}`)
+      .then(res => {
+        this.local = res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 };
 </script>
 
 
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+}
 .caroucel {
   position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 250px;
+  height: 0;
   margin-top: 25px;
   margin-bottom: 10px;
   margin-left: 10px;
   background: white;
   transition: height 0.5s;
-}
-.hide {
   overflow: hidden;
-  height: 0px;
-  margin-top: 25px;
+}
+.hiden {
+  height: 300px;
+  /* margin-top: 25px; */
 }
 .caroucell-b {
   display: flex;
@@ -137,7 +204,8 @@ export default {
   height: 70px;
   width: 900px;
   margin-top: 20px;
-  z-index: 6;
+  background: blue;
+  z-index: 3;
 }
 .lbtn {
   display: flex;
@@ -165,5 +233,78 @@ export default {
 .rbtn a {
   text-decoration: none;
   color: black;
+}
+/* teeeeeeeeeeeeeeeetrerereteteeeeeeeeeeeeeeetteretretreteeee */
+.regis {
+  display: flex;
+  /* flex-direction: row; */
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../../assets/img/bgpage.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 300px;
+}
+.tagline {
+  width: 62%;
+}
+
+.tagline h1 {
+  position: absolute;
+  left: 56px;
+  top: 88px;
+  font-family: "Airbnb Cereal App Bold";
+  font-size: 50px;
+  color: #ffffff;
+}
+.form-con {
+  margin-top: 5px;
+  height: 50px;
+  width: 410px;
+  padding-left: 15px;
+  font-family: "Airbnb Cereal App Bold";
+  background: white;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
+}
+.label {
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 6px;
+  font-family: "Airbnb Cereal App Bold";
+  color: #d0cccc;
+  font-size: 12px;
+}
+.form-regis p {
+  margin-top: 50px;
+  font-family: "Airbnb Cereal App Bold";
+  font-size: 17px;
+  color: #ffffff;
+}
+.btnreg:hover {
+  background-color: black;
+}
+.btnreg {
+  background: #ffffff;
+  padding: 10px 0px;
+  width: 150px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #d0cccc;
+  color: #d0cccc;
+  font-family: "Airbnb Cereal App Bold";
+  font-size: 17px;
+  text-decoration: none;
+}
+.footer {
+  display: flex;
+}
+.footer h5 {
+  font-family: "Airbnb Cereal App Light";
+  font-size: 12px;
+  color: #ffffff;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 </style>

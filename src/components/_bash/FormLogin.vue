@@ -8,25 +8,31 @@
           Welcome , Please Login
           <br />to your account
         </p>
-        <form>
-          <div class="form-group">
+        <form @submit.prevent="login">
+          <div class="formgroup">
             <label for="exampleInputEmail1" class="label">Username</label>
-            <input v-model="datauser.username"
+            <input
+              v-model="email"
               type="text"
               class="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
             />
           </div>
-          <div class="form-group">
+          <div class="formgroup">
             <label for="exampleInputPassword1" class="label">Password</label>
-            <input v-model="datauser.password" type="password" class="form-control" id="exampleInputPassword1" />
+            <input
+              v-model="password"
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
             <input type="checkbox" class="form-check-input mt-2" id="exampleCheck1" />
             <label class="form-check-label ml-4 mr-4 mt-1" for="exampleCheck1">Remember me</label>
-            <a href="#">Forgot Password?</a>
+            <az href="#">Forgot Password?</az>
           </div>
-          <router-link to="Dashboard" class="btn btn-primary">Login</router-link>
-          <router-link to="/Register" class="btn btn-primary ml-0 ml-sm-2">Sign Up</router-link>
+          <button class="btnLogin">Login</button>
+          <router-link to="/Register"  ><button class="btnLogin ml-4">Sign Up</button></router-link>
         </form>
       </div>
     </div>
@@ -42,21 +48,42 @@ export default {
   },
   data() {
     return {
-      datauser: {
-        username: '',
-        password: ''
-      }
+      email: "",
+      password: "",
+      error: false
     };
   },
-  mounted() {
-    axios
-      .post("http://localhost:8000/user/login")
-      .then(res => {
-        this.userdata = res.data;
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  methods: {
+    login() {
+      axios
+        .post("http://localhost:8000/user/login", {
+          email: this.email,
+          password: this.password
+        })
+        .then(req => {
+          this.loginSucces(req);
+          // console.log(req);
+        })
+        .catch(() => {
+          this.loginFailed();
+        });
+    },
+    loginSucces(request) {
+      if (!request.data.result.password) {
+        this.loginFailed();
+        return;
+      }
+      localStorage.password = request.data.result.password;
+      localStorage.idUser = request.data.result.id_user;
+      localStorage.token = request.data.result.token;
+      this.error = false;
+      this.$router.replace("/");
+    },
+    loginFailed() {
+      this.error = "Login Failed";
+      delete localStorage.password;
+      delete localStorage.idUser;
+    }
   }
 };
 </script>
@@ -84,10 +111,10 @@ export default {
   padding: 0;
   margin-bottom: 30px;
 }
-.btn:hover {
+.btnLogin:hover {
   background-color: black;
 }
-.btn {
+.btnLogin {
   background: #ffffff;
   padding: 10px 0px;
   width: 150px;
@@ -117,7 +144,7 @@ export default {
   font-family: "Airbnb Cereal App Bold";
   color: #d0cccc;
 }
-.form-group a {
+.formgroup a {
   color: black;
   font-size: 17px;
   text-decoration: none;

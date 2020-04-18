@@ -4,6 +4,7 @@
       <div class="row">
         <CoverAuth />
         <FormLogin />
+        
       </div>
     </div>
   </div>
@@ -12,11 +13,14 @@
 <script>
 import CoverAuth from "../../components/_bash/CoverAuth.vue";
 import FormLogin from "../../components/_bash/FormLogin";
+// import contoh from "../../components/_bash/contoh.vue"
+
 export default {
   name: "Login",
   components: {
     CoverAuth,
     FormLogin
+    
   }
 };
 </script>
