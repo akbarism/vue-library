@@ -2,11 +2,10 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/akbarism/vue-library)
 ![GitHub contributors](https://img.shields.io/github/contributors/akbarism/vue-library)
-![GitHub stars](https://img.shields.io/github/stars/HiRahmat-Dev/akbarism/vue-library)
+![GitHub stars](https://img.shields.io/github/stars/akbarism/vue-library)
 ![GitHub forks](https://img.shields.io/github/forks/akbarism/vue-library?style=social)
 
 <p align="center">
-  <img height="100" src="./screenshots/library-logo.png">
   <img height="100" src="https://vuejs.org/images/logo.png">
 </p>
 <p align="center">
@@ -37,7 +36,7 @@
 ## Usage for development
 
 1. Open your terminal or command prompt
-2. Type `git clone https://github.com/HiRahmat-Dev/library-web-vuejs.git`
+2. Type `git clone https://github.com/akbarism/vue-library.git`
 3. Open the folder and type `npm install` for install dependencies
 4. Create Environment Variable [here](#create-environment-variable)
 5. Before run this, you must run [backend first](#related-project-backend)
