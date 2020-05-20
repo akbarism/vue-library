@@ -57,7 +57,21 @@ VUE_APP_SECRET_KEY=YOUR_API_KEY
 ## Screenshots
 
 
-coming soon
+<div align="center">
+    <img width="860" src="https://github.com/akbarism/vue-library/blob/master/src/assets/img/library6.gif">
+</div>
+<div align="center">
+    <img width="430" src="https://github.com/akbarism/vue-library/blob/master/src/assets/img/book1.png">   
+    <img width="430" src="https://github.com/akbarism/vue-library/blob/master/src/assets/img/book2.png">
+</div>
+<div align="center">
+    <img width="430" src="https://github.com/akbarism/vue-library/blob/master/src/assets/img/book3.png">   
+    <img width="430" src="https://github.com/akbarism/vue-library/blob/master/src/assets/img/book4.png">
+</div>
+<div align="center">
+    <img width="430" src="https://github.com/akbarism/vue-library/blob/master/src/assets/img/book5.png">   
+    <img width="430" src="https://github.com/akbarism/vue-library/blob/master/src/assets/img/book6.png">
+</div>
 
 
 ## Contributing
