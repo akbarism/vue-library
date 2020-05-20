@@ -2,22 +2,22 @@
   <div>
     <div v-if="local.result[0]">
       <div class="caroucel hiden">
-        <div class="slide-a">
+        <div class="slide-a" @click="a">
           <div class="opaciti">
-            <h1>Dilan 1990</h1>
-            <p>Pidi Baiq</p>
+            <h1>Imagine me</h1>
+            <p>Tahereh Mafi</p>
           </div>
         </div>
-        <div class="slide-b">
+        <div class="slide-b" @click="b">
           <div class="opacity">
-            <h1>Ubur-ubur Lembur</h1>
-            <p>Raditya Dika</p>
+            <h1>Haven Fall</h1>
+            <p>Sara Holland</p>
           </div>
         </div>
-        <div class="slide-c">
+        <div class="slide-c" @click="c">
           <div class="opaciti">
-            <h1>Laskar Pelangi</h1>
-            <p>Andrea hirata</p>
+            <h1>Vanisihing deep</h1>
+            <p>Astrid Scholte</p>
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@
           <p>New Here? Create a free account !!</p>
 
           <div class="footer">
-            <button @click="sign" type="submit" class="btnreg">Sign Up</button>
+            <router-link  to="register" class="btnreg">Sign Up</router-link>
             <h5>
               By signing up, you agree to Book’s Terms and
               <br />Conditions and Privacy Policy
@@ -84,7 +84,16 @@ export default {
         this.$router.go("/");
       });
     }
-  }
+  },
+  a() {
+    this.$router.push(`/book/51`)
+  },
+    b() {
+    this.$router.push(`/book/50`)
+  },
+    c() {
+    this.$router.push(`/book/49`)
+  },
   },
   updated() {
     if (this.email === "0") {
@@ -154,29 +163,33 @@ export default {
   align-items: flex-end;
   width: 400px;
   height: 200px;
-  background: url("../../assets/img/cover-dilan.jpg");
+  background: url("../../assets/img/caroa.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 10px;
   box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
   object-fit: cover;
+  cursor: pointer;
 }
 .opaciti {
   width: 100%;
   height: 80px;
   background: rgba(0, 0, 0, 0.4);
   border-radius: 0 0 10px 10px;
+  
 }
 .slide-b {
   display: flex;
   align-items: flex-end;
   width: 500px;
   height: 250px;
-  background: url("../../assets/img/cover-ubur.jpg");
+  background: url("../../assets/img/carob.jpg");
   background-size: cover;
   border-radius: 10px;
   box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
   background-position: -100px;
+  cursor: pointer;
+  object-fit: cover;
 }
 .opacity {
   width: 100%;
@@ -189,12 +202,23 @@ export default {
   align-items: flex-end;
   width: 400px;
   height: 200px;
-  background: url("../../assets/img/cover-laskar.jpg");
+  background: url("../../assets/img/caroc.jpg");
   background-size: cover;
   border-radius: 10px;
   box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1);
   background-position: -50px;
   margin-right: -100px;
+  cursor: pointer;
+  object-fit: cover;
+}
+.slide-a:active {
+    transform: scale(0.9);
+}
+.slide-b:active {
+    transform: scale(0.9);
+}
+.slide-c:active {
+    transform: scale(0.9);
 }
 .slide-btn {
   display: flex;
@@ -237,7 +261,6 @@ export default {
 /* teeeeeeeeeeeeeeeetrerereteteeeeeeeeeeeeeeetteretretreteeee */
 .regis {
   display: flex;
-  /* flex-direction: row; */
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url("../../assets/img/bgpage.jpg");
   background-position: center;
@@ -249,32 +272,11 @@ export default {
 }
 
 .tagline h1 {
-  position: absolute;
-  left: 56px;
-  top: 88px;
+  margin-left: 56px;
+  margin-top: 88px;
   font-family: "Airbnb Cereal App Bold";
   font-size: 50px;
   color: #ffffff;
-}
-.form-con {
-  margin-top: 5px;
-  height: 50px;
-  width: 410px;
-  padding-left: 15px;
-  font-family: "Airbnb Cereal App Bold";
-  background: white;
-  border: 1px solid #e0e0e0;
-  box-sizing: border-box;
-  border-radius: 5px;
-  box-shadow: 0px 20px 20px rgba(0, 0, 0, 0.2);
-}
-.label {
-  position: absolute;
-  margin-top: 5px;
-  margin-left: 6px;
-  font-family: "Airbnb Cereal App Bold";
-  color: #d0cccc;
-  font-size: 12px;
 }
 .form-regis p {
   margin-top: 50px;
@@ -283,13 +285,11 @@ export default {
   color: #ffffff;
 }
 .btnreg:hover {
-  background-color: black;
+  background-color: #221f1f;
 }
 .btnreg {
-  background: #ffffff;
-  padding: 10px 0px;
-  width: 150px;
-  margin-top: 10px;
+  background: black;
+  padding: 10px 40px;
   border-radius: 5px;
   border: 1px solid #d0cccc;
   color: #d0cccc;

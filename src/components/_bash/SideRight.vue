@@ -4,15 +4,60 @@
       <img :src="BookDetail.image" alt />
     </div>
     <div class="t">Add To Cart</div>
-    <div class="borrow-button" v-if="BookDetail.status === 1">Borrow</div>
+    <div class="borrow-button" v-if="BookDetail.status === 1" @click="borrowBook">Borrow</div>
     <div class="cant-button" v-else>Borrow</div>
-    
   </div>
 </template>
 <script>
+import axios from "axios";
+import Swal from 'sweetalert2'
+
 export default {
   name: "SideRight",
-  props: ["BookDetail"]
+  props: ["BookDetail"],
+  data() {
+    return {
+      userData: ""
+    };
+  },
+  methods: {
+    borrowBook() {
+      axios
+        .post("http://localhost:8000/loan", {
+          id_user: this.userData.result[0].id_user,
+          id_book: this.BookDetail.id_book
+        })
+        .then(res => {
+          res.data;
+          Swal.fire({
+            title: "Pinjam Buku  Berhasil!",
+            text: "Pergi ke history?",
+            icon: "success",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya"
+          }).then(result => {
+            if (result.value) {
+              this.$router.push('/history')
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
+  created() {
+    axios
+      .get(`http://localhost:8000/user/${localStorage.idUser}`)
+      .then(res => {
+        this.userData = res.data;
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 };
 </script>
 <style scoped>

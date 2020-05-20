@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container-fluid">
+    <div class="container-fluid ok">
       <div class="row">
         <CoverAuth />
         <FormRegister />
@@ -42,7 +42,9 @@ export default {
   margin: 0;
   padding: 0;
 }
-
+.ok {
+    overflow: hidden;
+}
 @media (max-width: 414px) {
   .img {
     display: flex;

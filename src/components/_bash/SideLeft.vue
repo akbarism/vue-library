@@ -48,8 +48,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 90px;
-  height: 30px;
+  padding: 7px 20px;
   background: #fbcc38;
   border-radius: 15px;
   color: #ffffff;

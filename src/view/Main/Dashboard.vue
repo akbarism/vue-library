@@ -1,8 +1,8 @@
 <template>
   <div class="containe">
-    <div class="content">
       <Navigation v-on:author="author" />
       <SideBar v-on:swipup="explor" v-bind="judul" />
+    <div class="content">
       <CarouCel />
       <modalAdd />
       <div class="list-book">
@@ -10,7 +10,7 @@
           <h1>{{judul}}</h1>
         </div>
       </div>
-      <CardOfBook v-bind="author" />
+      <CardOfBook  />
     </div>
   </div>
 </template>
@@ -89,9 +89,10 @@ export default {
   height: 100vh;
   width: 100%;
   z-index: 1;
-  /* overflow: hidden; */
+  overflow-x: hidden;
 }
 .content {
+  margin-top: 70px;
   display: flex;
   flex-direction: column;
   width: 100%;

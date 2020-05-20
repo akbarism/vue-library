@@ -6,7 +6,7 @@
           <div class="ed">Add Data</div>
           <p @click="close" class="fck">&times;</p>
         </div>
-        <form >
+        <form>
           <div class="form-group">
             <label class="label-title" for="exampleFormControlInput1">Title</label>
             <input
@@ -43,16 +43,18 @@
               id="exampleFormControlInput1"
               placeholder="Id Category.."
             >
-              <option value="1">Life</option>
-              <option value="2">Mistery</option>
-              <option value="3">Comic</option>
-              <option value="4">Eductaion</option>
+              <option value="1">Novel</option>
+              <option value="2">Komik</option>
+              <option value="3">Sejerah</option>
+              <option value="4">Buku Masakan</option>
+              <option value="4">Komputer</option>
+              <option value="4">Sosial</option>
+              <option value="4">Pendidikan</option>
             </select>
           </div>
           <div class="form-group">
             <label class="label-title" for="exampleFormControlInput1">Image Url</label>
             <input
-              
               type="file"
               ref="file"
               class="form-control"
@@ -105,8 +107,7 @@ export default {
       fd.append("status", this.dataUser.status);
       fd.append("id_category", this.dataUser.id_category);
       fd.append("description", this.dataUser.description);
-      axios.post(`http://localhost:8000/book/`, fd)
-      .then(res => {
+      axios.post(`http://localhost:8000/book/`, fd).then(res => {
         res.data;
         this.$router.replace(`Book/${res.data.result.insertId}`);
       });
@@ -122,12 +123,11 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 10;
-  padding-top: 0;
+  top: 0;
   left: 0;
   right: 0;
   width: 100%;
-  height: 100vh;
-  overflow: auto;
+  height: 1075px;
   background-color: rgba(0, 0, 0, 0.4);
 }
 .modal-on {
@@ -194,20 +194,15 @@ p.fck:focus {
   font-size: 20px;
 }
 .buttonAdd {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background: #fbcc38;
-  width: 100px;
-  height: 50px;
-  padding: 10px 32px;
-  border-radius: 5px;
+  padding: 10px 35px;
+  border-radius: 8px;
   color: white;
   text-align: center;
   margin-left: 500px;
   font-family: "Airbnb Cereal App Bold";
   font-size: 17px;
-  text-decoration: none;
+  border: none;
 }
 .form-group {
   display: flex;

@@ -2,15 +2,14 @@
   <div>
     <div v-if="local.result[0]">
       <div class="navigasi">
-        <div></div>
         <div class="kategori" v-bind:value="message">
           <a @click="down">
             {{message}}
-            <i @click="search" class="fas fa-caret-down"></i>
+            <i class="fas fa-caret-down"></i>
           </a>
           <ul class="dropdown-categories up">
-            <li @click="$emit(author)">Author</li>
-            <li @click="catwgoryMystery">Titleh</li>
+            <li @>Author</li>
+            <li >Titleh</li>
           </ul>
           <a @click="downy">
             All times
@@ -22,10 +21,10 @@
             <li>All Categories</li>
           </ul>
         </div>
-
+        <div class="parentsrc">
         <i class="fas fa-search"></i>
         <input type="text" class="cari" name="search" placeholder="search book" />
-
+        </div>
         <router-link to="Dashboard" class="logo">
           <img src="../../assets/img/shelfpage.png" alt="logo" />
           <h1>Library</h1>
@@ -35,20 +34,18 @@
     <!-- teeeeeeeeeeeeeeetetetetettttttttttttteteteteeeeeeeeeeeeeeet -->
     <div v-else>
       <div class="navigasi">
-        <div>
           <router-link to="Dashboard" class="logo-if">
             <img src="../../assets/img/shelfpage.png" alt="logo" />
             <h1>Library</h1>
           </router-link>
-        </div>
         <div class="if-kategori" v-bind:value="message">
           <a @click="down">
             {{message}}
-            <i @click="search" class="fas fa-caret-down"></i>
+            <i class="fas fa-caret-down"></i>
           </a>
           <ul class="dropdown-categories up">
-            <li @click="$emit(author)">Author</li>
-            <li @click="catwgoryMystery">Title</li>
+            <li >Author</li>
+            <li >Title</li>
           </ul>
           <a @click="downy">
             All times
@@ -60,9 +57,11 @@
             <li>All Categories</li>
           </ul>
         </div>
+        <div class="parentsrc">
         <i class="fas fa-search"></i>
         <input type="name" class="if-cari" placeholder="search book" />
-        <contoh />
+        </div>
+        <router-link to="login" class="lgn">Login</router-link>
       </div>
     </div>
   </div>
@@ -70,11 +69,7 @@
 
 <script>
 import Axios from "axios";
-import contoh from "../../components/_bash/contoh";
 export default {
-  components: {
-    contoh
-  },
   name: "Navigation",
   data() {
     return {
@@ -104,8 +99,8 @@ export default {
 
 <style scoped>
 .navigasi {
+  position: fixed;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 60px;
@@ -123,6 +118,7 @@ export default {
   align-items: center;
   width: 200px;
   height: 70px;
+  margin: 0 100px;
 }
 .if-kategori a {
   font-family: "Airbnb Cereal App Bold";
@@ -130,6 +126,9 @@ export default {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+.parentsrc {
+  position: relative;
 }
 .if-cari {
   position: relative;
@@ -139,12 +138,13 @@ export default {
   border: 1px solid #ccc;
   border-radius: 30px;
   padding-left: 40px;
-  margin-left: -100px;
+  margin-left: -30px;
+  outline: none;
 }
 .logo-if {
   display: flex;
   align-items: center;
-  width: 150px;
+  width: 200px;
   height: 70px;
   font-family: "Airbnb Cereal App Bold";
   color: black;
@@ -161,7 +161,7 @@ export default {
   align-items: center;
   width: 200px;
   height: 70px;
-  margin-right: -200px;
+  margin: 0 30px 0 300px;
 }
 .kategori a {
   font-family: "Airbnb Cereal App Bold";
@@ -178,7 +178,8 @@ export default {
   border: 1px solid #ccc;
   border-radius: 30px;
   padding-left: 40px;
-  margin-left: -300px;
+  margin-left: -30px;
+  outline: none;
 }
 .fas {
   position: relative;
@@ -197,6 +198,7 @@ export default {
   font-family: "Airbnb Cereal App Bold";
   color: black;
   text-decoration: none;
+  margin-left: 250px;
 }
 .logo img {
   width: 50px;
@@ -244,6 +246,15 @@ export default {
 }
 .dropdown-alltime li:hover {
   background: #d0cccc;
+}
+.lgn {
+  padding: 8px 35px;
+  background: #000000;
+  color: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+  margin-left: 300px;
+  text-decoration: none;
 }
 @media (max-width: 414px) {
 .if-kategori{

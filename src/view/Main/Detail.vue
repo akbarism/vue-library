@@ -25,12 +25,12 @@ export default {
       bookDetail: {}
     };
   },
-
   props: ["IdBook"],
   mounted() {
     axios.get(`http://localhost:8000/book/${this.IdBook}`).then(res => {
       this.bookDetail = res.data;
     });
+    
   }
 };
 </script>

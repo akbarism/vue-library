@@ -5,17 +5,15 @@
     </div>
     <div class="profil">
       <img :src="tes.result[0].photo" alt />
-      <input type="file" @change="onFileSelected" />
-      <button @change="onupload">Upload</button>
       <p>{{tes.result[0].fullname}}</p>
     </div>
     <div class="side-menu">
       <section @click="$emit('swipup')">Explore</section>
       <section>
-        <router-link to="History">History</router-link>
+        <router-link to="History" class="hist">History</router-link>
       </section>
       <section>Cart</section>
-      <div v-if="tes.result[0].role == 'admin'">
+      <div>
         <section @click="kliks">Add Book</section>
       </div>
       <section @click="logout">Log Out</section>
@@ -26,11 +24,9 @@
 import Axios from "axios";
 export default {
   name: "SideBar",
-  props: ["classes"],
   data() {
     return {
       tes: {},
-      photo: null
     };
   },
   methods: {
@@ -150,5 +146,9 @@ export default {
   font-size: 25px;
   padding: 10px 10px;
   color: black;
+}
+.hist {
+  text-decoration: none;
+  color: #000000;
 }
 </style>

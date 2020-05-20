@@ -5,6 +5,7 @@ import Register from './view/Main/Register.vue';
 import Login from './view/Main/Login.vue';
 import Detail from './view/Main/Detail.vue';
 import Activation from './components/_bash/Activation.vue'
+import history from './view/Main/history.vue'
 
 vue.use(VueRouter);
 
@@ -38,7 +39,7 @@ const routes = [
   {
     path: '/History',
     name: 'History',
-    component: History,
+    component: history,
   },
 ];
 const router = new VueRouter({

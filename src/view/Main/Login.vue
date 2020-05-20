@@ -1,10 +1,9 @@
 <template>
   <div>
-    <div class="container-fluid">
+    <div class="container-fluid ok">
       <div class="row">
         <CoverAuth />
         <FormLogin />
-        
       </div>
     </div>
   </div>
@@ -26,6 +25,9 @@ export default {
 </script>
 
 <style Scoped>
+.ok {
+  overflow: hidden;
+}
 @font-face {
   font-family: "Airbnb Cereal App Bold";
   font-style: normal;

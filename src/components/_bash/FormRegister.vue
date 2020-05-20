@@ -73,7 +73,7 @@ export default {
   methods: {
     sign(e) {
        e.preventDefault()
-      this.submitted = true;
+      // this.submitted = true;
       this.$v.$touch();
       if (this.$v.$invalid) {
         return;
